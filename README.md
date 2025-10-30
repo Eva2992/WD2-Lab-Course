@@ -1,1 +1,1 @@
-# WD2-Lab-
+# This repository is for Acedemic purpose for Web2(CSE-362)
