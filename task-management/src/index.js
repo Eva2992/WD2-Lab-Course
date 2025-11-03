@@ -2,9 +2,12 @@ const express = require('express');
 const app = express();
 const port = 3000;
 const tasks = [
-       { id: 1, title: 'Learn Node.js', completed: false },
-       { id: 2, title: 'Build REST API', completed: false }
-];
+    { id: 1, title: 'Learn Node.js', completed: false, priority: 'high', createdAt: new Date('2024-01-15') },
+    { id: 2, title: 'Build REST API', completed: false, priority: 'medium', createdAt: new Date('2024-01-16') },
+    { id: 3, title: 'Learn Express.js', completed: true, priority: 'high', createdAt: new Date('2024-01-14') },
+    { id: 4, title: 'Study MongoDB', completed: false, priority: 'low', createdAt: new Date('2024-01-17') },
+    { id: 5, title: 'Practice Git', completed: true, priority: 'medium', createdAt: new Date('2024-01-13') }
+  ];
 app.get('/', (req, res) => {
        res.send('Task Management API is running!');
 });
