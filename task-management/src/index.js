@@ -14,6 +14,20 @@ app.get('/', (req, res) => {
 app.get('/tasks', (req, res) => {
        res.json(tasks);
 });
+ 
+//adding GET/tasks/id route 
+
+app.get('/task/:id', (req, res) => {
+  const id = parseInt(req.params.id);
+  const task = tasks.find(t => t.id === id);
+
+  if (!task) {
+    return res.status(404).json({ error: "Task not found" });
+  }
+
+  res.json(task);
+});
+
 
 //adding health route 
 app.get('/health', (req, res) => {
