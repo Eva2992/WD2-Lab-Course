@@ -1,0 +1,69 @@
+GET/tasks 
+Response :
+
+[
+    {
+        "id": 1,
+        "title": "Learn Node.js",
+        "completed": false,
+        "priority": "high",
+        "createdAt": "2024-01-15T00:00:00.000Z"
+    },
+    {
+        "id": 2,
+        "title": "Build REST API",
+        "completed": false,
+        "priority": "medium",
+        "createdAt": "2024-01-16T00:00:00.000Z"
+    },
+    {
+        "id": 3,
+        "title": "Learn Express.js",
+        "completed": true,
+        "priority": "high",
+        "createdAt": "2024-01-14T00:00:00.000Z"
+    },
+    {
+        "id": 4,
+        "title": "Study MongoDB",
+        "completed": false,
+        "priority": "low",
+        "createdAt": "2024-01-17T00:00:00.000Z"
+    },
+    {
+        "id": 5,
+        "title": "Practice Git",
+        "completed": true,
+        "priority": "medium",
+        "createdAt": "2024-01-13T00:00:00.000Z"
+    }
+]
+
+
+GET/task/1
+Response : 
+{
+    "id": 1,
+    "title": "Learn Node.js",
+    "completed": false,
+    "priority": "high",
+    "createdAt": "2024-01-15T00:00:00.000Z"
+}
+
+
+
+GET/task/99 
+Response :
+
+{
+    "error": "Task not found"
+}
+
+
+
+GET/task/abc
+Response :
+
+{
+    "error": "Invalid ID format"
+}
