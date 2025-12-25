@@ -1,8 +1,75 @@
 const express = require('express');
 const router = express.Router();
 
-
+const { Task } = require('../../models') ;
 const db = require("../../config/db");
+
+
+//get task Sequelize
+router.get('/' , async (req, res) => {
+  try {
+    const tasks = await Task.findAll(); //sequelize method to get all tasks instead of raw SQL
+    res.status(200).json({
+      success: true,
+      data: tasks
+    });
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      error: error.message
+    });
+  }
+});
+
+// get tasks by id 
+
+router.get('/:id', async (req, res) => {
+  try {
+    const task = await Task.findByPk(req.params.id);
+    if (!task) return res.status(404).json({ error: 'Task not found' });
+    res.json(task);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
+// post create task
+router.post('/', async (req, res) => {
+  try {
+    const task = await Task.create(req.body);
+    res.status(201).json(task);
+  } catch (err) {
+    res.status(400).json({ error: err.message });
+  }
+});
+// PUT update task
+
+router.put('/:id', async (req, res) => {
+  try {
+    const task = await Task.findByPk(req.params.id);
+    if (!task) return res.status(404).json({ error: 'Task not found' });
+    await task.update(req.body);
+    res.json(task);
+  } catch (err) {
+    res.status(400).json({ error: err.message });
+  }
+});
+
+
+//  DELETE Task
+router.delete('/:id', async (req, res) => {
+  try {
+    const task = await Task.findByPk(req.params.id);
+    if (!task) return res.status(404).json({ error: 'Task not found' });
+    await task.destroy();
+    res.json({ 
+      message: 'Task deleted :',
+      data : {task }
+    });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
 
  /*
 // GET /tasks - Retrieve all tasks
@@ -49,7 +116,7 @@ router.post('/tasks', (req, res) => {
   }
 });
 
-*/
+
 
 // GET all tasks
 router.get('/', async (req, res) => {
@@ -116,6 +183,7 @@ res.status(204).send();
 console.error(err);
 res.status(500).json({ error: 'Failed to delete task' });
 }
-});
+}); */
+
 module.exports = router;
 
